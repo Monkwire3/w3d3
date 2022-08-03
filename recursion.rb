@@ -36,6 +36,23 @@ end
 
 def deep_dup(multi_array)
     return multi_array.map { |ele| ele} if multi_array.all? { |sub_ele| !sub_ele.is_a?(Array)}
-
-
 end
+
+def bsearch(array, n)
+    if array[array.length/2] == n
+        return array.length / 2
+    end
+    if array[array.length / 2] > n
+        return bsearch(array[0...array.length / 2], n)
+    else
+        return bsearch(array[(array.length / (2 + 1))..-1], n)
+    end
+end
+
+p bsearch([1, 2, 3], 1) # => 0
+p bsearch([2, 3, 4, 5], 3) # => 1
+p bsearch([2, 4, 6, 8, 10], 6) # => 2
+p bsearch([1, 3, 4, 5, 9], 5) # => 3
+p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
