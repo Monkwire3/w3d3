@@ -1,4 +1,5 @@
 #recursion
+require 'byebug'
 
 def range_iter(start, end_1)
     return [] if end_1 < start
@@ -35,7 +36,26 @@ end
 # p exponentiation_2(2, 4)
 
 def deep_dup(multi_array)
-    return multi_array.map { |ele| ele} if multi_array.all? { |sub_ele| !sub_ele.is_a?(Array)}
+    return multi_array.map { |ele| ele } if multi_array.all? { |sub_ele| !sub_ele.is_a?(Array) }
 
+    return multi_array.map do |el|
+        (el.is_a?(Array) ? deep_dup(el) : el)
+    end
 
 end
+
+
+def fib(n)
+    return [] if n == 0
+    return [0] if n == 1
+    return [0, 1] if n == 2
+
+    prev = fib(n - 1)
+    fib_array = prev
+    fib_array << prev[-1] + prev[-2]
+
+    return fib_array
+end
+
+
+p fib(5)
