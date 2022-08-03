@@ -39,15 +39,21 @@ def deep_dup(multi_array)
 end
 
 def bsearch(array, n)
-    if array[array.length/2] == n
-        return array.length / 2
-    end
-    if array[array.length / 2] > n
-        return bsearch(array[0...array.length / 2], n)
+    return nil if array.length == 0
+
+    middle_i = array.length / 2
+
+    if array[middle_i] == n
+        return middle_i
+    elsif array[middle_i] > n
+        return bsearch(array[0...middle_i], n)
     else
-        return bsearch(array[(array.length / (2 + 1))..-1], n)
+        prev = bsearch(array[middle_i + 1..-1], n)
+        return nil if prev == nil
+        return middle_i + 1 + prev
     end
 end
+
 
 p bsearch([1, 2, 3], 1) # => 0
 p bsearch([2, 3, 4, 5], 3) # => 1
@@ -56,3 +62,24 @@ p bsearch([1, 3, 4, 5, 9], 5) # => 3
 p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
 p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
 p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
+
+
+
+# def merge_helper(arr_1, arr_2)
+    # if arr_1 > arr_2
+        # return [arr_2 + arr_1]
+
+    # else 
+        # return [arr_1  + arr_2]
+# end
+
+# def merge_sort(arr)
+    # return arr if arr.length <=1 
+
+
+    # return merge_helper(merge_sort(arr[...arr.length / 2]) + merge_sort(arr[arr.length / 2..]))
+
+# end
+
+
+# p merge_sort([38, 27, 43, 3, 9, 82, 10])
