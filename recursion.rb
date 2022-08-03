@@ -1,4 +1,4 @@
-#recursion
+require 'byebug'
 
 def range_iter(start, end_1)
     return [] if end_1 < start
@@ -70,21 +70,42 @@ def merge_helper(arr_1, arr_2)
     while arr_1.length > 0
         arr_2.each_with_index do |num, idx|
             if arr_1[0] < num
-                arr_1.shift + arr_2[idx + 1..]
-                
+                arr_2 = arr_2[...idx] + [arr_1.shift] + arr_2[idx..]
+                break
             end
         end
     end
 
+    return arr_2
+
 end
 
 def merge_sort(arr)
-    return arr if arr.length <=1 
+    # debugger
+    return arr if arr.length <= 1
 
-    if arr.length == 2
-        return merge_helper()
-    else
+
+    
+ #   if arr.length == 1
+        #return merge_helper(arr, )
+
+
+
+    first_half = merge_sort(arr[0...(arr.length / 2)])
+    second_half = merge_sort(arr[((arr.length / 2))..-1])
+
+
+    return first_half + second_half if first_half.length == 1 && second_half.length == 1
+  
+    return merge_helper(first_half, second_half)
 
 end
 
-p merge_sort([38, 27, 43, 3, 9, 82, 10])
+#p merge_sort([38, 27, 43, 3, 9, 82, 10, 6])
+
+
+arr_1 = [1, 3, 56, 92, 32]
+arr_2 = [23, 45, 55, 90, 98]
+
+p merge_helper(arr_1, arr_2)
+p merge_helper([2], [3])
