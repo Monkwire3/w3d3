@@ -55,31 +55,36 @@ def bsearch(array, n)
 end
 
 
-p bsearch([1, 2, 3], 1) # => 0
-p bsearch([2, 3, 4, 5], 3) # => 1
-p bsearch([2, 4, 6, 8, 10], 6) # => 2
-p bsearch([1, 3, 4, 5, 9], 5) # => 3
-p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
-p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
-p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
+# p bsearch([1, 2, 3], 1) # => 0
+# p bsearch([2, 3, 4, 5], 3) # => 1
+# p bsearch([2, 4, 6, 8, 10], 6) # => 2
+# p bsearch([1, 3, 4, 5, 9], 5) # => 3
+# p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+# p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+# p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
 
 
 
-# def merge_helper(arr_1, arr_2)
-    # if arr_1 > arr_2
-        # return [arr_2 + arr_1]
+def merge_helper(arr_1, arr_2)
 
-    # else 
-        # return [arr_1  + arr_2]
-# end
+    while arr_1.length > 0
+        arr_2.each_with_index do |num, idx|
+            if arr_1[0] < num
+                arr_1.shift + arr_2[idx + 1..]
+                
+            end
+        end
+    end
 
-# def merge_sort(arr)
-    # return arr if arr.length <=1 
+end
 
+def merge_sort(arr)
+    return arr if arr.length <=1 
 
-    # return merge_helper(merge_sort(arr[...arr.length / 2]) + merge_sort(arr[arr.length / 2..]))
+    if arr.length == 2
+        return merge_helper()
+    else
 
-# end
+end
 
-
-# p merge_sort([38, 27, 43, 3, 9, 82, 10])
+p merge_sort([38, 27, 43, 3, 9, 82, 10])
